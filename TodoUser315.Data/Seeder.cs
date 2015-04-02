@@ -58,18 +58,25 @@ namespace TodoUser315.Data
                 roleManager.Create(new Role { Name = "General" });
 
             }
-            // assign the user into a role
+            // assign the userOne into a role
             if (!userManager.IsInRole(userOne.Id, "Admin"))
             {
                 userManager.AddToRole(userOne.Id, "Admin");
             }
-            
+            // assign the userTwo into a role
+            if (!userManager.IsInRole(userTwo.Id, "General"))
+            {
+                userManager.AddToRole(userTwo.Id, "General");
+            }
             //if Todos do not exist, add them
             if (!db.Todos.Any())
             {
-                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 1, Task = "Color Easter Eggs", DateCreated = DateTime.Now.AddDays(-10), });
-                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 2, Task = "Eat Easter Eggs", DateCreated = DateTime.Now.AddDays(-5), });
-                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 3, Task = "Study for Monday", DateCreated = DateTime.Now.AddDays(-1), });
+                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 1, Task = "Color Easter Eggs", DateCreated = DateTime.Now.AddDays(-10) });
+                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 2, Task = "Eat Easter Eggs", DateCreated = DateTime.Now.AddDays(-5) });
+                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 3, Task = "Study for Monday", DateCreated = DateTime.Now.AddDays(-1) });
+                db.Todos.Add(new Todo() { UserId = userTwo.Id, TodoId = 4, Task = "Freebase on couch", DateCreated = DateTime.Now.AddDays(-1) });
+                db.Todos.Add(new Todo() { UserId = userTwo.Id, TodoId = 5, Task = "Burn Couch", DateCreated = DateTime.Now.AddDays(-1) });
+                db.SaveChanges();
 
             }
 
