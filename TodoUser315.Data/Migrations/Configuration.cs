@@ -16,6 +16,8 @@ namespace TodoUser315.Data.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
+            Seeder.Seed(context);
+
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
