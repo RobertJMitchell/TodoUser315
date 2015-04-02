@@ -24,14 +24,55 @@ namespace TodoUser315.Data
             //seed data users...
             ApplicationUser userOne = null;
             userOne = userManager.FindByName("julio@codercamps.com");
-            if (userOne == null) { // if does not exist, do create them
+            // if USERONE does not exist, do create them
+            if (userOne == null) {
                 userManager.Create(new ApplicationUser {
                     Email = "julio@codercamps.com",
                     FirstName = "Julio",
                     LastName = "R",
                     UserName = "julio@codercamps.com"
                 }, "123456");
+
+                userOne = userManager.FindByName("julio@codercamps.com");
             }
+            ApplicationUser userTwo = null;
+            userTwo = userManager.FindByName("rickjames@codercamps.com");
+            // if USERTWO does not exist, do create them
+            if (userTwo == null)
+            {
+                userManager.Create(new ApplicationUser
+                {
+                    Email = "rickjames@codercamps.com",
+                    FirstName = "Rick",
+                    LastName = "James",
+                    UserName = "rickjames@codercamps.com"
+                }, "123456");
+
+                userTwo = userManager.FindByName("rickjames@codercamps.com");
+            }
+
+            // if ROLES does not exist, do create them
+            if (!roleManager.Roles.Any())
+            {
+                roleManager.Create(new Role { Name = "Admin" });
+                roleManager.Create(new Role { Name = "General" });
+
+            }
+            // assign the user into a role
+            if (!userManager.IsInRole(userOne.Id, "Admin"))
+            {
+                userManager.AddToRole(userOne.Id, "Admin");
+            }
+            
+            //if Todos do not exist, add them
+            if (!db.Todos.Any())
+            {
+                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 1, Task = "Color Easter Eggs", DateCreated = DateTime.Now.AddDays(-10), });
+                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 2, Task = "Eat Easter Eggs", DateCreated = DateTime.Now.AddDays(-5), });
+                db.Todos.Add(new Todo() { UserId = userOne.Id, TodoId = 3, Task = "Study for Monday", DateCreated = DateTime.Now.AddDays(-1), });
+
+            }
+
         }
     }
 }
