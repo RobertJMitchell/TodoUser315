@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="Todo.cs" />
   </ItemGroup>
   <ItemGroup>
