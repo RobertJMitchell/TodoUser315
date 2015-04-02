@@ -20,6 +20,18 @@ namespace TodoUser315.Data
             //generic identity - roles
             RoleStore<Role> roleStore = new RoleStore<Role>(db);
             RoleManager<Role> roleManager = new RoleManager<Role>(roleStore);
+
+            //seed data users...
+            ApplicationUser userOne = null;
+            userOne = userManager.FindByName("julio@codercamps.com");
+            if (userOne == null) { // if does not exist, do create them
+                userManager.Create(new ApplicationUser {
+                    Email = "julio@codercamps.com",
+                    FirstName = "Julio",
+                    LastName = "R",
+                    UserName = "julio@codercamps.com"
+                }, "123456");
+            }
         }
     }
 }
